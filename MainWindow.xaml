@@ -12,8 +12,23 @@
     WindowStyle="None"
     Topmost="True"
     ResizeMode="NoResize"
-    MouseDown="Window_MouseDown" >
+    MouseDown="_Window_MouseDown" >
     <Grid>
+        <StackPanel
+            Orientation="Horizontal"
+            Margin="10"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="Black">
+            <Label
+                Foreground="White"
+                Content="Azimuth: ">
+            </Label>
+            <Label
+                Name="azimuth"
+                Foreground="White">
+            </Label>
+        </StackPanel>
         <Line
             Stroke="Black"
             StrokeThickness="1"
@@ -35,7 +50,7 @@
         <Ellipse
             Name="mainEllipse"
             Fill="Black"
-            Opacity="0.1" MouseMove="Ellipse_MouseMove" MouseDown="mouseDown">
+            Opacity="0.1" MouseMove="_Ellipse_MouseMove" MouseDown="_MouseDown">
         </Ellipse>
         <Ellipse
             Width="100"
@@ -51,7 +66,7 @@
             X1="300"
             X2="600"
             Y1="300"
-            Y2="300" MouseDown="mouseDown">
+            Y2="300" MouseDown="_MouseDown">
         </Line>
         <Ellipse
             Width="15"

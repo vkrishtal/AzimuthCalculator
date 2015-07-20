@@ -25,7 +25,38 @@ namespace AzimuthCalculator
             InitializeComponent();
         }
 
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        double _CaclulateBearing(Point point_1, Point point_2)
+        {
+            double dx = point_2.X - point_1.X;
+            double dy = point_2.Y - point_1.Y;
+
+            double angle = 0.0;
+            if (dx > 0.0)
+            {
+                angle = (Math.PI * 0.5) + Math.Atan(dy / dx);
+            }
+            else if (dx < 0.0)
+            {
+                angle = (Math.PI * 1.5) + Math.Atan(dy / dx);
+            }
+            else if (dy > 0.0)
+            {
+                angle = 0.0;
+            }
+            else if (dy < 0.0)
+            {
+                angle = Math.PI;
+            }
+
+            return _RadianToDegree(angle);
+        }
+
+        private double _RadianToDegree(double angle)
+        {
+            return angle * (180.0 / Math.PI);
+        }
+
+        private void _Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
@@ -33,7 +64,7 @@ namespace AzimuthCalculator
             }
         }
 
-        private void Ellipse_MouseMove(object sender, MouseEventArgs e)
+        private void _Ellipse_MouseMove(object sender, MouseEventArgs e)
         {
             if (_moveLine)
             {
@@ -41,12 +72,13 @@ namespace AzimuthCalculator
 
                 line.X2 = pos.X;
                 line.Y2 = pos.Y;
+
+                double bearing = _CaclulateBearing(new Point(300, 300), pos);
+                azimuth.Content = Math.Round(bearing);
             }
         }
 
-        private bool _moveLine = true;
-
-        private void mouseDown(object sender, MouseButtonEventArgs e)
+        private void _MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.RightButton == MouseButtonState.Pressed)
             {
@@ -54,5 +86,6 @@ namespace AzimuthCalculator
             }
         }
 
+        private bool _moveLine = true;
     }
 }
